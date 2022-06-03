@@ -51,5 +51,5 @@ then
         ;;
     esac
 else
-	show_help
+    show_help
 fi
