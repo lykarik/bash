@@ -27,9 +27,9 @@ output=$( echo $filename | awk -F "." '{print $1}')".out."$expansion
 if [ -n "$task" ]
 then
     case "$task" in
-	-h | --help)
-		show_help
-		;;
+    -h | --help)
+	show_help
+	;;
     DTKO)
         $command.DocumentsTKOReplicationApp -h 670000 -i ./DTKO/$filename -o ./DTKO/$output 2>&1 | tee -a ./DTKO/$log
         ;;
