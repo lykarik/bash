@@ -23,6 +23,15 @@ show_help() {
         echo -e "\n==============================\n"
 }
 
+show_result() {
+        echo -e "\n==============================\n"
+        head result.txt | cat -n
+        echo -e "\nMore addresses in result.txt at this directory"
+        echo -e "\n==============================\n"
+
+}
+
+#Checking exist input arguments
 if [ -z $1 ] || [ -z $2 ]
 then
         case "$1" in
@@ -31,18 +40,17 @@ then
                 exit 1
                 ;;
         *)
-        echo "Arguments are absent. Please, try \"./sfi.sh --help\" for input information"
-        exit 1
-        ;;
-    esac
+                echo "Arguments are absent. Please, try \"./sfi.sh --help\" for input information"
+                exit 1
+                ;;
+        esac
 fi
 
+#Creating template array (contains last octet value)
 template=()
-for ((i=1; i<=254; i++))
-do
-        template[i]=$i
-done
+for ((i=1; i<=254; i++)); do template[i]=$i; done
 
+#Creating array with nodes we already have
 nodes=($(grep -rw $1 -e "ansible_host" | \
                 awk -F "=" '{print $2}' | \
                 awk -F " " '{print $1}' | \
@@ -50,6 +58,7 @@ nodes=($(grep -rw $1 -e "ansible_host" | \
                 uniq | \
                 awk -F "." '{print $4}'))
 
+#Annuling values equivalent existing nodes
 for x in ${!nodes[*]}
 do
         for y in ${template[*]}
@@ -62,6 +71,7 @@ do
         done
 done
 
+#Output results
 for i in ${template[*]}
 do
         if [[ -n ${template[i]} ]]
@@ -69,6 +79,4 @@ do
                 echo $2"."${template[i]}
         fi
 
-done > result.txt
-
-head result.txt
+done > result.txt; show_result
