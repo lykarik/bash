@@ -31,13 +31,11 @@ then
                 exit 1
                 ;;
         *)
-        echo "Argument are absent. Please, try \"./sfi.sh --help\" for input information"
+        echo "Arguments are absent. Please, try \"./sfi.sh --help\" for input information"
         exit 1
         ;;
     esac
 fi
-
-search_mask=$2".*"
 
 template=()
 for ((i=1; i<=254; i++))
@@ -70,4 +68,7 @@ do
         then
                 echo $2"."${template[i]}
         fi
+
 done > result.txt
+
+head result.txt
