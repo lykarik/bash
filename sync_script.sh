@@ -29,6 +29,7 @@ then
     case "$task" in
     -h | --help)
 	show_help
+	exit 1
 	;;
     DTKO)
         $command.DocumentsTKOReplicationApp -h 670000 -i ./DTKO/$filename -o ./DTKO/$output 2>&1 | tee -a ./DTKO/$log
