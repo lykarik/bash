@@ -4,11 +4,11 @@
 
 # Why this script created?
 # This script was created to automate search free ip from chosen pool (or set of ip's)
-# for create new VM's on vSphere, as sample
+# for create new VM's on vSphere, as a sample
 #
 # How it works?
-# Script will parse input file (should be hosts file of something like that)
-# Expected, input file contains ip addresses in use
+# Script will parse input file (should be hosts file or something like that)
+# Expected input file contains ip addresses in use
 
 show_help() {
         echo -e "\n=============================="
