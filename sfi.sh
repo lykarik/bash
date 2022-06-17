@@ -11,9 +11,9 @@
 # Expected, input file contains ip addresses in use
 
 show_help() {
-        echo -e "\n==============================\n"
-        echo "ERROR! Input arguments are empty!"
         echo -e "\n=============================="
+        echo "Search free IP's script"
+        echo -e "==============================\n"
         echo -e "Usage is:\n"
         echo "./sfi.sh <filename> <network without host octet>"
         echo -e "\n=============================="
