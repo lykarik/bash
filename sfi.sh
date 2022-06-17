@@ -25,7 +25,7 @@ show_help() {
 
 show_result() {
         echo -e "\n==============================\n"
-        head result.txt | cat -n
+        head sfi_result.txt | cat -n
         echo -e "\nMore addresses in result.txt at this directory"
         echo -e "\n==============================\n"
 
@@ -79,4 +79,4 @@ do
                 echo $2"."${template[i]}
         fi
 
-done > result.txt; show_result
+done > sfi_result.txt; show_result
