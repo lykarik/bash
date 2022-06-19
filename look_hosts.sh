@@ -1,8 +1,8 @@
 #!/bin/bash
 
 hosts=(
-"172.16.3.37 pg10a"
-"172.16.2.72 ppak-app-timer-srv01"
+"2"
+"1"
 )
 
 look_host(){
