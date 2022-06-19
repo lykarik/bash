@@ -1,8 +1,5 @@
 #!/bin/bash
 
-pg10a=172.16.3.37
-timer=172.16.2.72
-
 hosts=(
 "172.16.3.37 pg10a"
 "172.16.2.72 ppak-app-timer-srv01"
