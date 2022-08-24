@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NGINX_CONF="/etc/nginx/nginx.conf"
-UI_SERVER="ppak-app-ui-srv04"
+UI_SERVER="servername"
 
 read task <<< $( echo $1 )
 
