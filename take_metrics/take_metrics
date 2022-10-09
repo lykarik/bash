@@ -3,10 +3,11 @@
 WRK_FOLDER="/etc/alternatives"
 SERVICE="tomcat"
 
-#PID_HERE=`${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $1}'`
+PID_HERE=`${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $1}'`
 #FGC_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $9}' | tail -n +3`
 #EDEN_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $3}' | tail -n +3`
 #OLD_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $4}' | tail -n +3`
+#JMAP_STAT=`${WRK_FOLDER}/jmap -histo ${PID_HERE} | head -n 40 | grep 'ru.la'`
 
 if [ -n "$1" ]
 then
@@ -16,17 +17,27 @@ then
         exit 1
         ;;
     -pid)
-        echo $(($PID_HERE))
+        #echo $(($PID_HERE))
+        ${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $1}'
         ;;
     -fgc)
-        echo $(($FGC_STAT))
+        #echo $(($FGC_STAT))
+        ${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $9}' | tail -n +3
         ;;
     -eden)
-        echo $EDEN_STAT
+        #echo $EDEN_STAT
+        ${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $3}' | tail -n +3
         ;;
     -old)
-        echo $OLD_STAT
+        #echo $OLD_STAT
+        ${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $4}' | tail -n +3
         ;;
+    -jmap)
+        #echo $OLD_STAT
+        echo "Found classes: $(($(sudo -u tomcat ${WRK_FOLDER}/jmap -histo ${PID_HERE} | head -n 10 | wc -l) - 3))"
+        sudo -u tomcat ${WRK_FOLDER}/jmap -histo ${PID_HERE} | head -n 10
+        ;;
+
     *)
         echo "invalid attributes"
         echo "help info"
@@ -35,4 +46,3 @@ then
 else
     echo "NO ATTRIBUTES"
 fi
-
