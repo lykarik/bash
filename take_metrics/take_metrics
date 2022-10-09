@@ -1,0 +1,7 @@
+#!/bin/bash
+
+WRK_FOLDER=""
+
+PID_HERE=`${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $9}'`
+FGC_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 2500 2 | awk '{print $9}'`
+
