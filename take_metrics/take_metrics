@@ -1,7 +1,33 @@
 #!/bin/bash
 
-WRK_FOLDER=""
+WRK_FOLDER="/etc/alternatives"
+SERVICE="tomcat"
 
-PID_HERE=`${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $9}'`
-FGC_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 2500 2 | awk '{print $9}'`
+PID_HERE=`${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $1}'`
+FGC_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $9}' | tail -n +3`
+
+#echo $(($PID_HERE))
+
+#echo $(($FGC_STAT))
+
+if [ -n "$1" ]
+then
+    case "$1" in
+    -h | --help)
+        echo "help info"
+        exit 1
+        ;;
+    -pid)
+        echo $(($PID_HERE))
+        ;;
+    -fgc)
+        echo $(($FGC_STAT))
+        ;;
+    *)
+        echo "no attributes"
+        exit 1
+    esac
+else
+    echo "NO ATTRIBUTES"
+fi
 
