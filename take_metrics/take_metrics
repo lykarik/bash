@@ -3,12 +3,10 @@
 WRK_FOLDER="/etc/alternatives"
 SERVICE="tomcat"
 
-PID_HERE=`${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $1}'`
-FGC_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $9}' | tail -n +3`
-
-#echo $(($PID_HERE))
-
-#echo $(($FGC_STAT))
+#PID_HERE=`${WRK_FOLDER}/jps -v | grep ${SERVICE} | awk '{print $1}'`
+#FGC_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $9}' | tail -n +3`
+#EDEN_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $3}' | tail -n +3`
+#OLD_STAT=`${WRK_FOLDER}/jstat -gccause ${PID_HERE} 3000 2 | awk '{print $4}' | tail -n +3`
 
 if [ -n "$1" ]
 then
@@ -23,8 +21,15 @@ then
     -fgc)
         echo $(($FGC_STAT))
         ;;
+    -eden)
+        echo $EDEN_STAT
+        ;;
+    -old)
+        echo $OLD_STAT
+        ;;
     *)
-        echo "no attributes"
+        echo "invalid attributes"
+        echo "help info"
         exit 1
     esac
 else
